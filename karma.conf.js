@@ -3,8 +3,6 @@
 
 module.exports = function (config) {
   config.set({
-    autoWatch: false,
-    singleRun: true,
     basePath: "",
     frameworks: ["jasmine", "@angular-devkit/build-angular"],
     plugins: [
