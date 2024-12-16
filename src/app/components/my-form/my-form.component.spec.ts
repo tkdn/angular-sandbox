@@ -1,5 +1,5 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { render, screen } from '@testing-library/angular';
+import { render, screen, waitFor } from '@testing-library/angular';
 import { MyFormComponent } from './my-form.component';
 import userEvent from '@testing-library/user-event';
 
@@ -24,7 +24,7 @@ describe('MyFormComponent', () => {
       expect(btn).toBeDisabled();
     }));
 
-    it('when inputs are fullfilled, button is able to submit', fakeAsync(async () => {
+    it('when inputs are fullfilled, button is able to submit', async () => {
       const { detectChanges } = await render(MyFormComponent);
       const btn = screen.queryByRole('button');
       const email = screen.getByLabelText<HTMLInputElement>('Your email');
@@ -33,10 +33,9 @@ describe('MyFormComponent', () => {
       await userEvent.type(email, 'foo@bar.exmaple');
       await userEvent.type(pass, 'deadbeefdeadbeef');
       detectChanges();
-      tick();
 
-      expect(btn).toBeEnabled();
-    }));
+      await waitFor(() => expect(btn).toBeEnabled());
+    });
   });
 
   describe('error message', () => {
