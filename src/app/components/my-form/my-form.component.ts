@@ -13,6 +13,7 @@ export class MyFormComponent {
   readonly state = inject(MyFormState);
 
   submit() {
+    this.state.writeToStorage();
     alert(`email: ${this.state.email()}, pass: ${this.state.password()}`);
   }
 }
