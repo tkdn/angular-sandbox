@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MyFormState } from './my-form.state';
 
 @Component({
   selector: 'app-my-form',
@@ -9,10 +10,9 @@ import { FormsModule } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyFormComponent {
-  readonly email = signal('');
-  readonly password = signal('');
+  readonly state = inject(MyFormState);
 
   submit() {
-    alert(`email: ${this.email()}, pass: ${this.password()}`);
+    alert(`email: ${this.state.email()}, pass: ${this.state.password()}`);
   }
 }
