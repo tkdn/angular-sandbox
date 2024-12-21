@@ -69,4 +69,13 @@ describe('MyFormComponent', () => {
       expect(screen.queryByText('password is invalid.')).toBeInTheDocument();
     }));
   });
+
+  it('state instantination outside injection context', async () => {
+    const state = new MyFormState();
+    state.email.set('foo@bar.exmaple');
+    const { detectChanges } = await setup(state);
+    detectChanges();
+
+    expect(screen.queryByText('email is invalid.')).not.toBeInTheDocument();
+  });
 });
