@@ -2,11 +2,11 @@ import { fakeAsync, tick } from '@angular/core/testing';
 import { render, screen } from '@testing-library/angular';
 import { MyFormComponent } from './my-form.component';
 import userEvent from '@testing-library/user-event';
-import { MyFormState } from './my-form.state';
+import { MyFormState, provideMyFormState } from './my-form.state';
 
-async function setup() {
+async function setup(state?: MyFormState) {
   return await render(MyFormComponent, {
-    providers: [MyFormState],
+    providers: [provideMyFormState(state)],
   });
 }
 
